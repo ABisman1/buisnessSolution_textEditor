@@ -3,7 +3,7 @@ from tkinter import *
 from tkmacosx import Button
 
 def new():
-	pass
+	open('unit1PT.py')
 
 def view():
 	pass
