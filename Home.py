@@ -20,7 +20,7 @@ label_1 = Label(root, text="Select to Continue")
 # Place widgets in window (with pack function!)
 new_button.grid(row=2,column=0)
 label.grid(row=0,column=1)
-view_button.grid(row=2,column=2,sticky='s')
+view_button.grid(row=2,column=2,sticky='s',pady=100)
 label_1.grid(row=1,column=1)
 
 # Start the GUI event loop
