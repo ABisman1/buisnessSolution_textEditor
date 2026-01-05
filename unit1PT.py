@@ -2,6 +2,9 @@ from tkinter import *
 #need to install on all machines
 from tkmacosx import Button
 
+def save():
+	
+
 # Create the main window
 editer = Tk()
 editer.title("Enter Title Here")
@@ -13,7 +16,9 @@ editer.geometry("2000x1000")
 label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
 
 # Create buttons
-save_button = Button(editer, text="Save",font=("Arial", 20, "bold"))
+save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
+
+
 
 # Creates textbox
 text_box = Text(editer,width=200,height=55)
