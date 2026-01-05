@@ -3,7 +3,7 @@ from tkinter import *
 from tkmacosx import Button
 
 def save():
-	
+	pass
 
 # Create the main window
 editer = Tk()
