@@ -4,7 +4,7 @@ from tkmacosx import Button
 
 def writeF():
 	text = text_box.get('1.0',END)
-	with open("demfile.txt", "w") as f:
+	with open("Notes/"name+".txt", "w") as f:
 		f.write(text)
 		print("You entered: ")
 		print(text)
