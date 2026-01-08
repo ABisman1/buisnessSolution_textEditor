@@ -3,7 +3,34 @@ from tkinter import *
 from tkmacosx import Button
 
 def new():
-	fileaudit = open('unit1PT.py')
+
+	def save():
+		pass
+
+	name = StringVar()
+	Entry(root, textvariable=name)
+
+	editer = Toplevel(root)
+	editer.geometry("2000x1000")
+	editer.title(name)
+
+	#Creates label
+	label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
+
+	# Create buttons
+	save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
+
+	# Creates textbox
+	text_box = Text(editer,width=200,height=55)
+
+	label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
+	text_box.grid(row=1,column=0,columnspan=3,padx=30)
+	save_button.grid(row=2,column=0,sticky='sw',padx=30)
+
+
+	# Start the GUI event loop
+	editer.mainloop()
+
 
 def view():
 	pass
