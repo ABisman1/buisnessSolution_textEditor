@@ -1,15 +1,17 @@
 from tkinter import *
 #need to install on all machines
 from tkmacosx import Button
+import os
 
 def new():
 
 	def save():
+		text = text_box.get('1.0',END)
+		with open("Notes/"+name+".txt", "w") as f:
+			f.write(text)
 		pass
 
-	name = StringVar()
-	Entry(root, textvariable=name)
-
+	name = enter.get()
 	editer = Toplevel(root)
 	editer.geometry("2000x1000")
 	editer.title(name)
@@ -33,6 +35,9 @@ def new():
 
 
 def view():
+	#opener=OptionMenu(root, *os.listdir("Notes"))
+	print(os.listdir("Notes"))
+	#opener.grid(row=3,column=2)
 	pass
 
 # Create the main window
@@ -46,15 +51,21 @@ root.geometry("2000x1000")
 new_button = Button(root, text="Open New File", font=("Arial", 20, "bold"),height=40,width=175,command=new)
 view_button = Button(root, text="View Files",font=("Arial", 20, "bold"),height=40,width=175,command=view)
 
+enter=Entry(root)
+
+
 #Add a label
 label = Label(root, text="Welcome to Note Taker",font=("Arial", 20, "bold"))
 label_1 = Label(root, text="Select to Continue",font=("Arial", 20, "bold"))
+label_2 = Label(root, text="Enter Name of Notes Here")
 
 # Place widgets in window (with pack function!)
 new_button.grid(row=2,column=0,padx=200)
 label.grid(row=0,column=1,padx=47,pady=50)
 view_button.grid(row=2,column=2,padx=200,pady=150)
 label_1.grid(row=1,column=1,pady=25)
+label_2.grid(row=3,column=0)
+enter.grid(row=4, column=0)
 
 # Start the GUI event loop
 root.mainloop()

@@ -12,6 +12,7 @@ editer.geometry("2000x1000")
 #Creates label
 label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
 
+
 # Create buttons
 save_button = Button(editer, text="Save",font=("Arial", 20, "bold"))
 
