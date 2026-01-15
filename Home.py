@@ -13,7 +13,13 @@ def new():
 			text = text_box.get('1.0',END)
 			with open("Notes/"+name+".txt", "w") as f:
 				f.write(text)
-			pass
+			editer.quit()
+			listOfFiles = [os.listdir("Notes")]
+			frame = Frame(root)
+			opener=Listbox(frame)
+			for i in range(0, len(listOfFiles)):
+				opener.insert(i,listOfFiles[i])
+				pass
 
 		editer = Toplevel(root)
 		editer.geometry("2000x1000")
