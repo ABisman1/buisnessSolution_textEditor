@@ -54,11 +54,14 @@ new_button = Button(root, text="Open New File", font=("Arial", 20, "bold"),heigh
 view_button = Button(root, text="View Files",font=("Arial", 20, "bold"),height=40,width=175,command=view)
 
 enter=Entry(root)
-
+listOfFiles = [os.listdir("Notes")]
 frame = Frame(root)
 opener=Listbox(frame)
-opener.insert(1,"one")
-opener.insert(2,"two")
+for i in range(0, len(listOfFiles)):
+	opener.insert(i,listOfFiles[i])
+
+#opener.insert(1,"one")
+#opener.insert(2,"two")
 
 
 #Add a label
