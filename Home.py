@@ -2,42 +2,44 @@ from tkinter import *
 #need to install on all machines
 from tkmacosx import Button
 import os
+import tkinter.messagebox as box
 
 def new():
 
-	def save():
-		text = text_box.get('1.0',END)
-		with open("Notes/"+name+".txt", "w") as f:
-			f.write(text)
-		pass
-
 	name = enter.get()
-	editer = Toplevel(root)
-	editer.geometry("2000x1000")
-	editer.title(name)
+	if name != "":
 
-	#Creates label
-	label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
+		def save():
+			text = text_box.get('1.0',END)
+			with open("Notes/"+name+".txt", "w") as f:
+				f.write(text)
+			pass
 
-	# Create buttons
-	save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
+		editer = Toplevel(root)
+		editer.geometry("2000x1000")
+		editer.title(name)
 
-	# Creates textbox
-	text_box = Text(editer,width=200,height=55)
+		#Creates label
+		label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
 
-	label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
-	text_box.grid(row=1,column=0,columnspan=3,padx=30)
-	save_button.grid(row=2,column=0,sticky='sw',padx=30)
+		# Create buttons
+		save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
+
+		# Creates textbox
+		text_box = Text(editer,width=200,height=55)
+
+		label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
+		text_box.grid(row=1,column=0,columnspan=3,padx=30)
+		save_button.grid(row=2,column=0,sticky='sw',padx=30)
 
 
-	# Start the GUI event loop
-	editer.mainloop()
+		# Start the GUI event loop
+		editer.mainloop()
 
 
 def view():
-	#opener=OptionMenu(root, *os.listdir("Notes"))
+	
 	print(os.listdir("Notes"))
-	#opener.grid(row=3,column=2)
 	pass
 
 # Create the main window
@@ -53,19 +55,28 @@ view_button = Button(root, text="View Files",font=("Arial", 20, "bold"),height=4
 
 enter=Entry(root)
 
+frame = Frame(root)
+opener=Listbox(frame)
+opener.insert(1,"one")
+opener.insert(2,"two")
+
 
 #Add a label
 label = Label(root, text="Welcome to Note Taker",font=("Arial", 20, "bold"))
 label_1 = Label(root, text="Select to Continue",font=("Arial", 20, "bold"))
 label_2 = Label(root, text="Enter Name of Notes Here")
+label_3 = Label(root, text="Selet File you Want to Open")
 
 # Place widgets in window (with pack function!)
-new_button.grid(row=2,column=0,padx=200)
+new_button.grid(row=4,column=0,padx=200)
 label.grid(row=0,column=1,padx=47,pady=50)
-view_button.grid(row=2,column=2,padx=200,pady=150)
+view_button.grid(row=4,column=2,padx=200,pady=150)
 label_1.grid(row=1,column=1,pady=25)
-label_2.grid(row=3,column=0)
-enter.grid(row=4, column=0)
+label_2.grid(row=2,column=0)
+label_3.grid(row=2,column=2)
+enter.grid(row=3, column=0)
+frame.grid(row=3,column=2)
+opener.pack()
 
 # Start the GUI event loop
 root.mainloop()

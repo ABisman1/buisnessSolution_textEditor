@@ -1,13 +1,24 @@
-import customtkinter
+from tkinter import *
+import tkinter.messagebox as box
 
-def button_callback():
-    print("button pressed")
+window = Tk()
+window.title( '<title>' )
 
-app = customtkinter.CTk()
-app.title("my app")
-app.geometry("400x150")
+frame = Frame( window )
 
-button = customtkinter.CTkButton(app, text="my button", command=button_callback)
-button.grid(row=0, column=0, padx=20, pady=20)
+listbox = Listbox( frame )
+listbox.insert( 1, '<filename>' )
+listbox.insert( 2, '<filename>' )
+listbox.insert( 3, '<filename>' )
 
-app.mainloop()
+def dialog() :
+    box.showinfo( 'Selection' , 'Your Choice: ' + \
+    listbox.get( listbox.curselection() ) )
+
+btn = Button( frame, text = 'View Info', command=dialog )
+
+btn.pack( side = RIGHT , padx = 5 )
+listbox.pack( side = LEFT )
+frame.pack( padx = 30, pady = 30 )
+
+window.mainloop()
