@@ -4,49 +4,56 @@ from tkmacosx import Button
 import os
 import tkinter.messagebox as box
 
-def new():
+global name 
+name = ""
+newfile=True
 
-	name = enter.get()
-	if name != "":
+def edit():
 
-		def save():
+	def save():
 			text = text_box.get('1.0',END)
 			with open("Notes/"+name+".txt", "w") as f:
 				f.write(text)
-			editer.quit()
-			listOfFiles = [os.listdir("Notes")]
-			frame = Frame(root)
-			opener=Listbox(frame)
-			for i in range(0, len(listOfFiles)):
-				opener.insert(i,listOfFiles[i])
-				pass
+			editer.destroy()
 
-		editer = Toplevel(root)
-		editer.geometry("2000x1000")
-		editer.title(name)
+	editer = Toplevel(root)
+	editer.geometry("2000x1000")
+	editer.title(name)
+	enter.delete(0,END)
 
-		#Creates label
-		label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
+	#Creates label
+	label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
 
-		# Create buttons
-		save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
+	# Create buttons
+	save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
 
-		# Creates textbox
-		text_box = Text(editer,width=200,height=55)
+	# Creates textbox
+	text_box = Text(editer,width=200,height=55)
 
-		label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
-		text_box.grid(row=1,column=0,columnspan=3,padx=30)
-		save_button.grid(row=2,column=0,sticky='sw',padx=30)
+	if newfile==False:
+		with open(selected, "r") as f:
+			content = f.read()
+			text_box.insert('1.0', content)
+
+	label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
+	text_box.grid(row=1,column=0,columnspan=3,padx=30)
+	save_button.grid(row=2,column=0,sticky='sw',padx=30)
 
 
-		# Start the GUI event loop
-		editer.mainloop()
+	# Start the GUI event loop
+	editer.mainloop()
 
+def new():
+	newfile=True
+	name = enter.get()
+	print(name)
+	#if name != "":
+	edit()
+	
 
 def view():
-	
-	print(os.listdir("Notes"))
-	pass
+	newfile=False
+	edit()
 
 # Create the main window
 root = Tk()
@@ -65,7 +72,7 @@ frame = Frame(root)
 opener=Listbox(frame)
 for i in range(0, len(listOfFiles)):
 	opener.insert(i,listOfFiles[i])
-
+selected=opener.curselection()
 #opener.insert(1,"one")
 #opener.insert(2,"two")
 

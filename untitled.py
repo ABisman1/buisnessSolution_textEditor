@@ -12,7 +12,7 @@ listbox.insert( 2, '<filename>' )
 listbox.insert( 3, '<filename>' )
 
 def dialog() :
-    box.showinfo( 'Selection' , 'Your Choice: ' + \
+    box.showinfo( 'Selection' , 'Your Choice: ' + 
     listbox.get( listbox.curselection() ) )
 
 btn = Button( frame, text = 'View Info', command=dialog )

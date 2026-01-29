@@ -10,7 +10,7 @@ def writeF():
 		print(text)
 
 def readF():
-	with open("demfile.txt", "r") as f:
+	with open("Notes/"name+".txt", "r") as f:
 		content = f.read()
 		print(content)
 		text_box.insert('1.0', content)
