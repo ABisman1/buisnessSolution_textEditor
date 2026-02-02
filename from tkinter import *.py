@@ -4,62 +4,24 @@ from tkmacosx import Button
 import os
 import tkinter.messagebox as box
 
+global name 
+name = ""
 newfile=True
+saved=True
 
-	
+def openNewFile():
+	for i in range(0, len(listOfFiles)):
+		opener.insert(i,listOfFiles[i])
+	selected=opener.curselection()
 
-def new():
-	name = enter.get()
-	if name != "":
-		def save():
-				text = text_box.get('1.0',END)
-				with open("Notes/"+name+".txt", "w") as f:
-					f.write(text)
-				listOfFiles = os.listdir("Notes")
-				print(listOfFiles)
-				opener.delete(0, END)
-				for i in range(0, len(listOfFiles)):
-					opener.insert(i,listOfFiles[i])
-				editer.destroy()
-			
+def edit():
 
-		editer = Toplevel(root)
-		editer.geometry("2000x1000")
-		editer.title(name)
-		enter.delete(0,END)
-
-		#Creates label
-		label = Label(editer, text='Enter Text Here',font=("Arial", 20, "bold"))
-
-		# Create buttons
-		save_button = Button(editer, text="Save",font=("Arial", 20, "bold"), command=save)
-
-		# Creates textbox
-		text_box = Text(editer,width=200,height=55)
-
-		label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
-		text_box.grid(row=1,column=0,columnspan=3,padx=30)
-		save_button.grid(row=2,column=0,sticky='sw',padx=30)
-
-
-		# Start the GUI event loop
-		editer.mainloop()
-
-
-def view():
-	selected= opener.get(opener.curselection())
-	name = selected.replace(".txt","")
-	print(selected)
 	def save():
-		text = text_box.get('1.0',END)
-		with open("Notes/"+name+".txt", "w") as f:
-			f.write(text)
-		listOfFiles = os.listdir("Notes")
-		print(listOfFiles)
-		opener.delete(0, END)
-		for i in range(0, len(listOfFiles)):
-			opener.insert(i,listOfFiles[i])
-		editer.destroy()
+			text = text_box.get('1.0',END)
+			with open("Notes/"+name+".txt", "w") as f:
+				f.write(text)
+			saved=True
+			editer.destroy()
 
 	editer = Toplevel(root)
 	editer.geometry("2000x1000")
@@ -75,19 +37,32 @@ def view():
 	# Creates textbox
 	text_box = Text(editer,width=200,height=55)
 
+	if newfile==False:
+		with open(selected, "r") as f:
+			content = f.read()
+			text_box.insert('1.0', content)
+			saved=False
+
 	label.grid(row=0,column=1,sticky='w',padx=325,pady=10)
 	text_box.grid(row=1,column=0,columnspan=3,padx=30)
 	save_button.grid(row=2,column=0,sticky='sw',padx=30)
-	
-	with open("Notes/"+selected, "r") as f:
-		content = f.read()
-		text_box.insert('1.0', content)
+
 
 	# Start the GUI event loop
 	editer.mainloop()
 
+def new():
+	newfile=True
+	name = enter.get()
+	print(name)
+	#if name != "":
+	edit()
+	
 
-
+def view():
+	newfile=False
+	saved=False
+	edit()
 
 # Create the main window
 root = Tk()
@@ -101,13 +76,11 @@ new_button = Button(root, text="Open New File", font=("Arial", 20, "bold"),heigh
 view_button = Button(root, text="View Files",font=("Arial", 20, "bold"),height=40,width=175,command=view)
 
 enter=Entry(root)
-listOfFiles = os.listdir("Notes")
+listOfFiles = [os.listdir("Notes")]
 frame = Frame(root)
 opener=Listbox(frame)
-for i in range(0, len(listOfFiles)):
-		opener.insert(i,listOfFiles[i])
-global selected
-
+if saved == True:
+	openNewFile()
 #opener.insert(1,"one")
 #opener.insert(2,"two")
 
